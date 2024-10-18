@@ -35,7 +35,7 @@ while True:
 ESCOLHA UMA DAS OPÇÕES ABAIXO:
 
 1 - ADICIONAR NOVO CONTATO
-2 - VISUALIZAR LISTA DE CONTATO EXISTENTE
+2 - VISUALIZAR LISTA DE CONTATOS EXISTENTES
 3 - EDITAR CONTATO
 4 - EXCLUIR CONTATO
 5 - FAVORITAR CONTATO
@@ -53,7 +53,7 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO:
             
             lista_de_contatos.append(contato)
         
-        # VISUALIZAR LISTA DE CONTATO EXISTENTE
+        # VISUALIZAR LISTA DE CONTATOS EXISTENTES
         if opcao_escolhida == 2:
             
             if lista_de_contatos == []:
