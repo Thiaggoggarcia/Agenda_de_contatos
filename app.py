@@ -162,8 +162,18 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO:
             for lista_favoritos in lista_de_contatos:             
                 
                 if lista_favoritos[3] == True:
-                    print(f"{cont} - {lista_favoritos}")
-                    cont += 1
+            
+                    for indice_excluir,lista_excluir in enumerate(lista_de_contatos):             
+                    
+                        if lista_excluir[0] == remove_nome.strip():
+                            print(f"Excluindo o contado de {lista_excluir[0]}")
+                            lista_de_contatos.pop(indice_excluir)  
+                            break
+                        
+                        if indice_excluir == len(lista_de_contatos) - 1: 
+                            print("Contato não localizado")
+                            print(f"{cont} - {lista_favoritos}")
+                            cont += 1
                   
             if cont == 1: 
                 print("Sem Contatos Favoritos")
