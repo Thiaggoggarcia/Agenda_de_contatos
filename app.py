@@ -1,8 +1,8 @@
 def criar_contato():
     contato = []
-    nome = input("Nome: ")
-    telefone = input("Telefone: ")
-    email = input("Email: ")
+    nome = input("NOME: ")
+    telefone = input("TELEFONE: ")
+    email = input("EMAIL: ")
     print(f"""
     Favoritar Contato do {nome} ?
     1 - SIM
@@ -74,6 +74,39 @@ def remover_contato(nome, lista_contatos):
         if indice == len(lista_contatos) - 1: 
             print("CONTATO NÃO LOCALIZADO")
 
+def favoritar_contato(nome,lista_contatos):
+     for indice,lista in enumerate(lista_contatos):
+                
+        if lista[0] == nome.strip() and lista[3] == False:
+            print(f"\n{lista[0]} FOI ADICIONADO AOS FAVORITOS")
+            lista[3] = True 
+            break
+            
+        elif lista[0] == nome.strip() and lista[3] == True:
+            print(f"\n{lista[0]} JÁ FOI ADICIOANDO AOS FAVORITOS\n")
+            print("""DESEJA REMOVER DOS FAVORITOS ?
+        1 - SIM
+        2 - NÃO 
+        """)
+            
+            resposta = int(input())
+            
+            if resposta == 1:
+                print(f"\n{lista[0]} FOI REMOVIDO DOS FAVORITOS")
+                lista[3] = False
+                break
+            
+            elif resposta == 2:
+                break
+            
+            else:
+                print( "OPÇÃO INCORRETA, TENTE NOVAMENTE")
+                break
+        
+        if indice == len(lista_contatos) - 1: 
+            print("CONTATO NÃO LOCALIZADO")
+     
+
 lista_de_contatos = []
 
 while True:
@@ -90,43 +123,46 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO:
 7 - SAIR
 """)
     try:
-        opcao_escolhida = int(input("Digite uma das opções: "))
+        opcao_escolhida = int(input("DIGITE UMA OPÇÃO: "))
         
         if opcao_escolhida == 1:
             contato = criar_contato()
             
-            print("Novo Contato Adicionado!")
-            print(contato)
+            print("NOVO CONTATO ADICIONADO!")
+            print(contato[0:3])
             
             lista_de_contatos.append(contato)
         
         # VISUALIZAR LISTA DE CONTATOS EXISTENTES
         if opcao_escolhida == 2:
-            print("###### LISTA DE CONTATOS ######")
+            print("\n###### LISTA DE CONTATOS ######")
             cont = 1
             for lista in lista_de_contatos:
-                print(f"{cont} - {lista}")
+                print(f"{cont} - {lista[0:3]}")
                 cont += 1
             
         # EDITAR CONTATO
-        if opcao_escolhida == 3:
+        if opcao_escolhida == 3: 
+            if lista_de_contatos == []:
+                print ("LISTA DE CONTATOS VAZIA")
+                continue
             
             print("QUAL CONTATO DESEJA EDITAR: ")
             pesquisa_nome_contato = input()
 
             edita_contato(pesquisa_nome_contato,lista_de_contatos)
             
-        # REMOVER CONTATO
+        # EXCLUIR CONTATO
         if opcao_escolhida == 4:
             if lista_de_contatos == []:
-                print("OPERAÇÃO INDISPONÍVEL, LISTA VAZIA!")
-                break
+                print ("LISTA DE CONTATOS VAZIA")
+                continue
             
             remove_nome = input("QUAL CONTATO IRÁ REMOVER? ")
 
             remover_contato(remove_nome, lista_de_contatos)
             
-            for indice_excluir,lista_excluir in enumerate(lista_de_contatos):             
+            """ for indice_excluir,lista_excluir in enumerate(lista_de_contatos):             
                 
                 if lista_excluir[0] == remove_nome.strip():
                     print(f"Excluindo o contado de {lista_excluir[0]}")
@@ -134,52 +170,33 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO:
                     break
                   
                 if indice_excluir == len(lista_de_contatos) - 1: 
-                    print("Contato não localizado")
+                    print("Contato não localizado")"""
          
         #FAVORITAR CONTATO
         if opcao_escolhida == 5:
+            if lista_de_contatos == []:
+                print ("LISTA DE CONTATOS VAZIA")
+                continue
             
-            favoritar_nome = input("Qual O Nome Do Contato Que Deseja Adicionar ao Favoritos? ")
+            print("QUAL CONTATO DESEJA ADICIONAR OU REMOVER DOS FAVORITOS ? ")
+            nome_favorito = input()
             
-            for indice_favoritar,lista_favoritar in enumerate(lista_de_contatos):
-                
-                if lista_favoritar[0] == favoritar_nome.strip():
-                    print(f"{lista_favoritar[0]} Foi Adicionado aos Favoritos")
-                    lista_favoritar[3] = True 
-                    break
-                  
-                if indice_favoritar == len(lista_de_contatos) - 1: 
-                    print("Contato não localizado")
+            favoritar_contato(nome_favorito, lista_de_contatos)
                 
         #LISTA DE CONTATOS FAVORITOS
         if opcao_escolhida == 6:
             if lista_de_contatos == []:
-                print("Operação indisponível, lista vazia")
+                print ("LISTA DE CONTATOS VAZIA")
                 continue
             
-            cont = 1
             print("###### LISTA DE CONTATOS FAVORITOS ######")
             for lista_favoritos in lista_de_contatos:             
                 
                 if lista_favoritos[3] == True:
-            
-                    for indice_excluir,lista_excluir in enumerate(lista_de_contatos):             
-                    
-                        if lista_excluir[0] == remove_nome.strip():
-                            print(f"Excluindo o contado de {lista_excluir[0]}")
-                            lista_de_contatos.pop(indice_excluir)  
-                            break
-                        
-                        if indice_excluir == len(lista_de_contatos) - 1: 
-                            print("Contato não localizado")
-                            print(f"{cont} - {lista_favoritos}")
-                            cont += 1
-                  
-            if cont == 1: 
-                print("Sem Contatos Favoritos")
+                    print(lista_favoritos[0:3])
         
         if opcao_escolhida == 7:
-            print("Saindo...")
+            print("FECHANDO O PROGRAMA...")
             break
         
         
