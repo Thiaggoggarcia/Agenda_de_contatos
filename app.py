@@ -26,6 +26,53 @@ def criar_contato():
     
     return contato
 
+def edita_contato(nome, lista_contatos):
+    
+    for indice,lista in enumerate(lista_contatos):
+        if lista[0] == nome.strip():
+            print("ESCOLHA O CAMPO A SER ALTERADO ?")
+            print(
+    """
+    1 - NOME
+    3 - EMAIL
+    2 - TELEFONE
+    """)
+            opcao = int(input("DIGITE UMA OPÇÃO: "))
+
+            if opcao == 1:
+                novo_nome = input("DIGITE O NOVO NOME: ")
+                lista[0] = novo_nome
+                print("ALTERADO COM SUCESSO!")
+                return
+            
+            elif opcao == 2:
+                novo_email = input("DIGITE O NOVO EMAIL: ")
+                lista[1] = novo_email
+                print("ALTERADO COM SUCESSO!")
+                return
+            
+            elif opcao == 3:
+                novo_telefone = input("DIGITE O NOVO NUMERO: ")
+                lista[2] = novo_telefone
+                print("ALTERADO COM SUCESSO!")
+                return
+            
+            else:
+                print("OPÇÃO INVÁLIDA!")
+
+        if indice == len(lista_contatos) - 1: 
+            print("CONTATO NÃO LOCALIZADO")
+
+def remover_contato(nome, lista_contatos):
+    for indice,lista in enumerate(lista_contatos):             
+                
+        if lista[0] == nome.strip():
+            print(f"REMOVENDO O CONTATO DE {lista[0]}")
+            lista_contatos.pop(indice)  
+            break
+            
+        if indice == len(lista_contatos) - 1: 
+            print("CONTATO NÃO LOCALIZADO")
 
 lista_de_contatos = []
 
@@ -55,60 +102,29 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO:
         
         # VISUALIZAR LISTA DE CONTATOS EXISTENTES
         if opcao_escolhida == 2:
-            
-            if lista_de_contatos == []:
-                print("A lista de Contatos está vazia: Adicione Primeiro um Contato.")
-            else:
-                print("###### LISTA DE CONTATOS ######")
-                cont = 1
-                for lista in lista_de_contatos:
-                    print(f"{cont} - {lista}")
-                    cont += 1
+            print("###### LISTA DE CONTATOS ######")
+            cont = 1
+            for lista in lista_de_contatos:
+                print(f"{cont} - {lista}")
+                cont += 1
             
         # EDITAR CONTATO
         if opcao_escolhida == 3:
             
-            pesquisa_nome_contato = input("Qual Contato que seja Editar? ")
+            print("QUAL CONTATO DESEJA EDITAR: ")
+            pesquisa_nome_contato = input()
+
+            edita_contato(pesquisa_nome_contato,lista_de_contatos)
             
-            for indice_editar,lista_editar in enumerate(lista_de_contatos):
-                
-                if lista_editar[0] == pesquisa_nome_contato.strip():
-                    print(f"Qual informação deseja editar de {lista_editar[0]} ?")
-                    print("""
-                1 - NOME
-                3 - EMAIL
-                2 - TELEFONE
-                """)
-                    opcao = int(input("Digite a Opção: "))
-                    
-                    if opcao == 1:
-                        novo_nome = input("Digite o novo nome: ")
-                        lista_editar[0] = novo_nome
-                        break
-                    
-                    elif opcao == 2:
-                        novo_email = input("Digite o novo Email: ")
-                        lista_editar[1] = novo_email
-                        break
-                    
-                    elif opcao == 3:
-                        novo_telefone = input("Digite o novo Telefone: ")
-                        lista_editar[2] = novo_telefone
-                        break
-                    
-                    else:
-                        print("Opção não listada!")
-               
-                if indice_editar == len(lista_de_contatos) - 1: 
-                    print("Contato não localizado")
-        
-        # EXCLUIR CONTATO
+        # REMOVER CONTATO
         if opcao_escolhida == 4:
             if lista_de_contatos == []:
-                print("Operação indisponível, lista vazia")
-                continue
+                print("OPERAÇÃO INDISPONÍVEL, LISTA VAZIA!")
+                break
             
-            remove_nome = input("Qual o nome do contato que deseja remover? ")
+            remove_nome = input("QUAL CONTATO IRÁ REMOVER? ")
+
+            remover_contato(remove_nome, lista_de_contatos)
             
             for indice_excluir,lista_excluir in enumerate(lista_de_contatos):             
                 
